@@ -25,7 +25,6 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
                     <state key="normal" title="Player 1"/>
                     <connections>
-                        <action selector="save:" destination="-1" eventType="touchUpInside" id="7jh-AN-RlC"/>
                         <outletCollection property="gestureRecognizers" destination="ga9-kE-SlY" appends="YES" id="ZNJ-kW-onP"/>
                     </connections>
                 </button>
@@ -36,7 +35,6 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
                     <state key="normal" title="Player 2"/>
                     <connections>
-                        <action selector="save:" destination="-1" eventType="touchUpInside" id="KrA-SQ-rYX"/>
                         <outletCollection property="gestureRecognizers" destination="Sqc-gt-IA7" appends="YES" id="rSp-Cb-94h"/>
                     </connections>
                 </button>
@@ -61,8 +59,20 @@
                 <outletCollection property="gestureRecognizers" destination="VbW-Gh-s5A" appends="YES" id="t5Q-Un-C3i"/>
             </connections>
         </view>
-        <tapGestureRecognizer numberOfTouchesRequired="2" id="VbW-Gh-s5A"/>
-        <panGestureRecognizer minimumNumberOfTouches="1" id="ga9-kE-SlY"/>
-        <panGestureRecognizer minimumNumberOfTouches="1" id="Sqc-gt-IA7"/>
+        <tapGestureRecognizer numberOfTouchesRequired="2" id="VbW-Gh-s5A">
+            <connections>
+                <action selector="changeServiceType:" destination="-1" id="2wR-nA-hp6"/>
+            </connections>
+        </tapGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="ga9-kE-SlY">
+            <connections>
+                <action selector="handleFirstButtonAttachmentGesture:" destination="-1" id="fbm-40-ssr"/>
+            </connections>
+        </panGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="Sqc-gt-IA7">
+            <connections>
+                <action selector="handleSecondButtonAttachmentGesture:" destination="-1" id="TlA-Pm-9fA"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
 </document>

@@ -15,6 +15,7 @@
     
     int serviceType;
     int server;
+    int winner;
     int endingEvent;
 }
 

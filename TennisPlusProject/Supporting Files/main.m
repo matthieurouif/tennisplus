@@ -2,7 +2,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ParseStarterProjectAppDelegate.h"
+#import "TennisPlusProjectAppDelegate.h"
 
 int main(int argc, char *argv[])
 {

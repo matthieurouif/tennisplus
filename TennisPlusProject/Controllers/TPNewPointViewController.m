@@ -76,29 +76,56 @@
 //  IBAction for the Pan Gesture Recognizer that has been configured to track
 //  touches in self.view.
 //
-- (IBAction)handleAttachmentGesture:(UIPanGestureRecognizer*)gesture
+- (IBAction)handleFirstButtonAttachmentGesture:(UIPanGestureRecognizer*)gesture
 {
+    winner = FirstPlayerId;
     
     if(gesture.state == UIGestureRecognizerStateEnded)
     {
-        //All fingers are lifted.
+        CGPoint velocity = [gesture velocityInView:self.view];
+        if(velocity.x < -200)
+        {
+            [self unforcedErrorAction:nil];
+        }
+        else if (velocity.x > 200)
+        {
+            [self winnerAction:nil];
+        }
         //[self.animator removeAllBehaviors];
+        [self save:nil];
+    }
+    
+}
+
+- (IBAction)handleSecondButtonAttachmentGesture:(UIPanGestureRecognizer*)gesture
+{
+    winner = SecondPlayerId;
+    
+    if(gesture.state == UIGestureRecognizerStateEnded){
+        CGPoint velocity = [gesture velocityInView:self.view];
+        if(velocity.x < -200)
+        {
+            [self unforcedErrorAction:nil];
+        }
+        else if (velocity.x > 200)
+        {
+            [self winnerAction:nil];
+        }
+        //[self.animator removeAllBehaviors];
+        [self save:nil];
     }
 }
+
 
 
 -(IBAction)unforcedErrorAction:(id)sender
 {
     endingEvent = EndingEventUnforcedError;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Unforced Error";
 }
 
 -(IBAction)winnerAction:(id)sender
 {
     endingEvent = EndingEventWinnerShot;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Winner";
 }
 
 -(void)updateServiceTypeDisplay
@@ -185,24 +212,22 @@
     NSString *keyToIncrementWinner;
     NSString *keyToIncrementService;
     
-    if(sender == _firstPlayerWinButton){
+    if(sender == _firstPlayerWinButton || winner == FirstPlayerId){
         point[@"winning"] = [NSNumber numberWithInt:FirstPlayerId];
         keyToIncrementWinner = @"WinP1";
     }
-    else if(sender == _secondPlayerWinButton){
+    else if(sender == _secondPlayerWinButton || winner == SecondPlayerId){
         point[@"winning"] = [NSNumber numberWithInt:SecondPlayerId];
         keyToIncrementWinner = @"WinP2";
     }
     
-    switch (server)
-    {
+    switch (server){
         case 0:{
             point[@"serving"] = [NSNumber numberWithInt:FirstPlayerId];
             keyToIncrementService = @"ServiceP1";
         }
             break;
-        case 1:
-        {
+        case 1:{
             point[@"serving"] = [NSNumber numberWithInt:SecondPlayerId];
             keyToIncrementService = @"ServiceP2";
         }
@@ -210,8 +235,7 @@
     }
     
     
-    switch (serviceType)
-    {
+    switch (serviceType){
         case ServingTypeFirstServe:{
             point[@"servingType"] = [NSNumber numberWithInt:ServingTypeFirstServe];
             keyToIncrementService = [keyToIncrementService stringByAppendingString:@"1st"];
@@ -234,8 +258,7 @@
     }
     
     
-    switch (endingEvent)
-    {
+    switch (endingEvent){
         case EndingEventWinnerShot:{
             keyToIncrementWinner = [keyToIncrementWinner stringByAppendingString:@"WinnerShot"];
             point[@"endingEvent"] = [NSNumber numberWithInt:EndingEventWinnerShot];
@@ -257,7 +280,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"Loading";
+    hud.labelText = [NSString stringWithFormat:@"Loading %@ %@",keyToIncrementWinner,keyToIncrementService];
 
     [point saveEventually:^(BOOL succeeded, NSError *error) {
         [hud hide:YES];

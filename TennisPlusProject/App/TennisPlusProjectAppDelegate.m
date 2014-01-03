@@ -3,7 +3,7 @@
 #import "TPGamesTableViewController.h"
 
 
-@implementation ParseStarterProjectAppDelegate
+@implementation TennisPlusProjectAppDelegate
 
 
 #pragma mark - UIApplicationDelegate
@@ -134,9 +134,9 @@
 
 - (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
     if ([result boolValue]) {
-        NSLog(@"ParseStarterProject successfully subscribed to push notifications on the broadcast channel.");
+        NSLog(@"TennisPlusProject successfully subscribed to push notifications on the broadcast channel.");
     } else {
-        NSLog(@"ParseStarterProject failed to subscribe to push notifications on the broadcast channel.");
+        NSLog(@"TennisPlusProject failed to subscribe to push notifications on the broadcast channel.");
     }
 }
 
