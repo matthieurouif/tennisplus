@@ -115,7 +115,8 @@
     }
     
     PFObject *aPoint = [self.objects objectAtIndex:indexPath.row];
-    cell.textLabel.text = aPoint[@"event"];
+    NSNumber *value = aPoint[@"winning"];
+    cell.textLabel.text = value.stringValue;
     cell.detailTextLabel.text = aPoint[@"ender"];
     
     return cell;

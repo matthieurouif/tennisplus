@@ -47,7 +47,7 @@
     serverSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
     
     // Do any additional setup after loading the view from its nib.
-    UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    /*UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.firstPlayerWinButton]];
     // Creates collision boundaries from the bounds of the dynamic animator's
     // reference view (self.view).
@@ -55,7 +55,7 @@
     collisionBehavior.collisionDelegate = self;
     [animator addBehavior:collisionBehavior];
     
-    self.animator = animator;
+    self.animator = animator;*/
 
 }
 

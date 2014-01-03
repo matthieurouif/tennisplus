@@ -81,7 +81,7 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="addAttachment:" destination="-1" eventType="touchDown" id="BuY-FQ-qUI"/>
+                        <action selector="save:" destination="-1" eventType="touchUpInside" id="7jh-AN-RlC"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVX-72-JzH">
@@ -96,7 +96,7 @@
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="addAttachment:" destination="-1" eventType="touchDown" id="UJA-yb-8VV"/>
+                        <action selector="save:" destination="-1" eventType="touchUpInside" id="3DX-58-keT"/>
                     </connections>
                 </button>
             </subviews>

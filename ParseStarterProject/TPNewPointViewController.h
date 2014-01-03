@@ -15,7 +15,6 @@
     IBOutlet UISegmentedControl *serverSegmentControl;
     IBOutlet UISegmentedControl *serverTypeSegmentControl;
     IBOutlet UISegmentedControl *eventSegmentControl;
-
 }
 
 typedef enum {
