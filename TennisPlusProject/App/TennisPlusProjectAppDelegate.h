@@ -1,6 +1,6 @@
 @class ParseStarterProjectViewController;
 
-@interface ParseStarterProjectAppDelegate : NSObject <UIApplicationDelegate> {
+@interface TennisPlusProjectAppDelegate : NSObject <UIApplicationDelegate> {
 
 }
 

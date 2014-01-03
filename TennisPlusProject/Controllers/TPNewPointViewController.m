@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIAttachmentBehavior  *attachmentBehavior;
 @property (nonatomic, strong) IBOutlet UIButton     *firstPlayerWinButton;
 @property (nonatomic, strong) IBOutlet UIButton     *secondPlayerWinButton;
+@property (nonatomic, strong) IBOutlet UIButton     *serviceStateButton;
 
 @end
 
@@ -38,14 +39,18 @@
 {
     [super viewDidLoad];
     
-    [_firstPlayerWinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _firstPlayerWinButton.titleLabel.textAlignment = _secondPlayerWinButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [_secondPlayerWinButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_firstPlayerWinButton setTintColor:[UIColor whiteColor]];
+    _firstPlayerWinButton.titleLabel.textAlignment = _secondPlayerWinButton.titleLabel.textAlignment = _serviceStateButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_secondPlayerWinButton setTintColor:[UIColor whiteColor]];
+    [_serviceStateButton setTintColor:[UIColor whiteColor]];
 
-    eventSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
-    serverTypeSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
-    serverSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
+    [_firstPlayerWinButton setBackgroundColor:[UIColor redColor]];
+    [_secondPlayerWinButton setBackgroundColor:[UIColor blueColor]];
+    [_serviceStateButton setBackgroundColor:[UIColor orangeColor]];
+
     
+    serviceType = 0;
+    [self updateServiceTypeDisplay];
     // Do any additional setup after loading the view from its nib.
     /*UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.firstPlayerWinButton]];
@@ -66,13 +71,13 @@
 }
 
 
+
 //| ----------------------------------------------------------------------------
 //  IBAction for the Pan Gesture Recognizer that has been configured to track
 //  touches in self.view.
 //
 - (IBAction)handleAttachmentGesture:(UIPanGestureRecognizer*)gesture
 {
-    [self.attachmentBehavior setAnchorPoint:[gesture locationInView:self.view]];
     
     if(gesture.state == UIGestureRecognizerStateEnded)
     {
@@ -82,16 +87,44 @@
 }
 
 
--(IBAction)serviceTypeWasDefined:(id)sender
+-(IBAction)unforcedErrorAction:(id)sender
 {
-    //if we have a double fault
-    if(serverTypeSegmentControl.selectedSegmentIndex == 2){
-        switch (serverSegmentControl.selectedSegmentIndex)
+    endingEvent = EndingEventUnforcedError;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Unforced Error";
+}
+
+-(IBAction)winnerAction:(id)sender
+{
+    endingEvent = EndingEventWinnerShot;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Winner";
+}
+
+-(void)updateServiceTypeDisplay
+{
+    switch (serviceType) {
+        case ServingTypeFirstServe:
+            [_serviceStateButton setTitle:NSLocalizedString(@"1st Serve", @"Description of first service state") forState:UIControlStateNormal];
+            break;
+        case ServingTypeSecondServe:
+            [_serviceStateButton setTitle:NSLocalizedString(@"2nd Serve", @"Description of second service state") forState:UIControlStateNormal];
+            break;
+        case ServingTypeDoubleFault:
+            [_serviceStateButton setTitle:NSLocalizedString(@"Double Fault", @"Description of double fault service state") forState:UIControlStateNormal];
+            break;
+        default:
+            [_serviceStateButton setTitle:NSLocalizedString(@"Ready", @"Description of ready service state") forState:UIControlStateNormal];
+            break;
+    }
+    
+    if(serviceType == ServingTypeDoubleFault){
+        switch (server)
         {
                 //if we don't know the server, we can't record the point
-            case UISegmentedControlNoSegment:{
+            case -1:{
                 //restor the SegmentControl
-                serverTypeSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
+                serviceType = UISegmentedControlNoSegment;
                 [[[UIAlertView alloc] initWithTitle:@"No server assigned" message:@"Assign a server" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }
                 break;
@@ -105,9 +138,16 @@
                 [self save:_firstPlayerWinButton];
             }
                 break;
-            
+                
         }
     }
+}
+
+-(IBAction)changeServiceType:(id)sender
+{
+    //if we have a double fault
+    serviceType += 1;
+    [self updateServiceTypeDisplay];
     
 }
 
@@ -154,7 +194,7 @@
         keyToIncrementWinner = @"WinP2";
     }
     
-    switch (serverSegmentControl.selectedSegmentIndex)
+    switch (server)
     {
         case 0:{
             point[@"serving"] = [NSNumber numberWithInt:FirstPlayerId];
@@ -170,19 +210,19 @@
     }
     
     
-    switch (serverTypeSegmentControl.selectedSegmentIndex)
+    switch (serviceType)
     {
-        case 0:{
+        case ServingTypeFirstServe:{
             point[@"servingType"] = [NSNumber numberWithInt:ServingTypeFirstServe];
             keyToIncrementService = [keyToIncrementService stringByAppendingString:@"1st"];
         }
             break;
-        case 1:{
+        case ServingTypeSecondServe:{
             point[@"servingType"] = [NSNumber numberWithInt:ServingTypeSecondServe];
             keyToIncrementService = [keyToIncrementService stringByAppendingString:@"2nd"];
         }
             break;
-        case 2:{
+        case ServingTypeDoubleFault:{
             point[@"servingType"] = [NSNumber numberWithInt:ServingTypeDoubleFault];
             keyToIncrementService = [keyToIncrementService stringByAppendingString:@"Double"];
             
@@ -194,14 +234,14 @@
     }
     
     
-    switch (eventSegmentControl.selectedSegmentIndex)
+    switch (endingEvent)
     {
-        case 0:{
+        case EndingEventWinnerShot:{
             keyToIncrementWinner = [keyToIncrementWinner stringByAppendingString:@"WinnerShot"];
             point[@"endingEvent"] = [NSNumber numberWithInt:EndingEventWinnerShot];
         }
             break;
-        case 1:{
+        case EndingEventUnforcedError:{
             point[@"endingEvent"] = [NSNumber numberWithInt:EndingEventUnforcedError];
             keyToIncrementWinner = [keyToIncrementWinner stringByAppendingString:@"UnforcedError"];
         }
@@ -211,8 +251,9 @@
     [game incrementKey:keyToIncrementWinner];
     [game incrementKey:keyToIncrementService];
             
-    eventSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
-    serverTypeSegmentControl.selectedSegmentIndex = UISegmentedControlNoSegment;
+    endingEvent = 0;
+    serviceType = 0;
+    [self updateServiceTypeDisplay];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;

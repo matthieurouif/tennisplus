@@ -12,9 +12,10 @@
 @interface TPNewPointViewController : UIViewController <UICollisionBehaviorDelegate>
 {
     PFObject *game;
-    IBOutlet UISegmentedControl *serverSegmentControl;
-    IBOutlet UISegmentedControl *serverTypeSegmentControl;
-    IBOutlet UISegmentedControl *eventSegmentControl;
+    
+    int serviceType;
+    int server;
+    int endingEvent;
 }
 
 typedef enum {
@@ -37,6 +38,9 @@ typedef enum {
 @property (nonatomic, retain) PFObject * game;
 
 -(IBAction)save:(id)sender;
--(IBAction)serviceTypeWasDefined:(id)sender;
+
+-(IBAction)changeServiceType:(id)sender;
+-(IBAction)unforcedErrorAction:(id)sender;
+-(IBAction)winnerAction:(id)sender;
 
 @end

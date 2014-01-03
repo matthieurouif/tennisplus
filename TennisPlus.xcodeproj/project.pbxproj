@@ -16,10 +16,8 @@
 		099CCEAD13F9E3760039A464 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 099CCEAC13F9E3760039A464 /* libz.1.1.3.dylib */; };
 		09ABC07213A1D52D009C3FCF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABC07113A1D52D009C3FCF /* UIKit.framework */; };
 		09ABC07413A1D52D009C3FCF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABC07313A1D52D009C3FCF /* Foundation.framework */; };
-		09ABC07C13A1D52D009C3FCF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09ABC07A13A1D52D009C3FCF /* InfoPlist.strings */; };
 		09ABC07F13A1D52D009C3FCF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ABC07E13A1D52D009C3FCF /* main.m */; };
-		09ABC08213A1D52D009C3FCF /* ParseStarterProjectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ABC08113A1D52D009C3FCF /* ParseStarterProjectAppDelegate.m */; };
-		09ABC08513A1D52E009C3FCF /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09ABC08313A1D52D009C3FCF /* MainWindow.xib */; };
+		09ABC08213A1D52D009C3FCF /* TennisPlusProjectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ABC08113A1D52D009C3FCF /* TennisPlusProjectAppDelegate.m */; };
 		09BEF34C13D51C3F001BBCDB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BEF34B13D51C3F001BBCDB /* Security.framework */; };
 		2FCDD6B014A573F500295AAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCDD6AF14A573F500295AAC /* QuartzCore.framework */; };
 		4998650515BF305000803E05 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4998650415BF305000803E05 /* StoreKit.framework */; };
@@ -27,17 +25,13 @@
 		C4C51B571613CE0800959FDC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C51B541613CE0800959FDC /* Default.png */; };
 		C4C51B581613CE0800959FDC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C51B551613CE0800959FDC /* Default-568h@2x.png */; };
 		C4C51B591613CE0800959FDC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C51B561613CE0800959FDC /* Default@2x.png */; };
-		DC246DD318494C5500FDB56C /* TPGamesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC246DD218494C5500FDB56C /* TPGamesViewController.m */; };
+		DC246DD318494C5500FDB56C /* TPGamesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC246DD218494C5500FDB56C /* TPGamesTableViewController.m */; };
 		DC246DE618496ABA00FDB56C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = DC246DE218496ABA00FDB56C /* LICENSE */; };
 		DC246DE718496ABA00FDB56C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = DC246DE418496ABA00FDB56C /* MBProgressHUD.m */; };
 		DC246DE818496ABA00FDB56C /* README.mdown in Resources */ = {isa = PBXBuildFile; fileRef = DC246DE518496ABA00FDB56C /* README.mdown */; };
 		DC246DEB18496B8800FDB56C /* TPPointsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC246DEA18496B8800FDB56C /* TPPointsTableViewController.m */; };
 		DC246DF218496DF500FDB56C /* TPNewPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC246DF018496DF500FDB56C /* TPNewPointViewController.m */; };
 		DC246DF318496DF500FDB56C /* TPNewPointViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC246DF118496DF500FDB56C /* TPNewPointViewController.xib */; };
-		DC6466BF185337F100835781 /* red-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6466BB185337F100835781 /* red-circle.png */; };
-		DC6466C0185337F100835781 /* red-circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6466BC185337F100835781 /* red-circle@2x.png */; };
-		DC6466C1185337F100835781 /* green-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6466BD185337F100835781 /* green-circle.png */; };
-		DC6466C2185337F100835781 /* green-circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DC6466BE185337F100835781 /* green-circle@2x.png */; };
 		DC6466C518533BE800835781 /* APLPositionToBoundsMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6466C418533BE800835781 /* APLPositionToBoundsMapping.m */; };
 		DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E18B1E1624CB5700B17A67 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -47,19 +41,17 @@
 		092354B213A1D7EB00DA740F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		092354B413A1D7F000DA740F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		092354B613A1D83C00DA740F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		094AC9FF14367ACD008398F8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		094AC9FF14367ACD008398F8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Vendor/Parse.framework; sourceTree = "<group>"; };
 		095ACE8513C68EA300566243 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		099CCEAC13F9E3760039A464 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		09ABC06D13A1D52D009C3FCF /* TennisPlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TennisPlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09ABC07113A1D52D009C3FCF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		09ABC07313A1D52D009C3FCF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09ABC07913A1D52D009C3FCF /* TennisPlus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TennisPlus-Info.plist"; sourceTree = "<group>"; };
-		09ABC07B13A1D52D009C3FCF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		09ABC07D13A1D52D009C3FCF /* TennisPlus-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TennisPlus-Prefix.pch"; sourceTree = "<group>"; };
 		09ABC07E13A1D52D009C3FCF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		09ABC08013A1D52D009C3FCF /* ParseStarterProjectAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseStarterProjectAppDelegate.h; sourceTree = "<group>"; };
-		09ABC08113A1D52D009C3FCF /* ParseStarterProjectAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseStarterProjectAppDelegate.m; sourceTree = "<group>"; };
-		09ABC08413A1D52E009C3FCF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		09ABC08013A1D52D009C3FCF /* TennisPlusProjectAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TennisPlusProjectAppDelegate.h; sourceTree = "<group>"; };
+		09ABC08113A1D52D009C3FCF /* TennisPlusProjectAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TennisPlusProjectAppDelegate.m; sourceTree = "<group>"; };
 		09BEF34B13D51C3F001BBCDB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2FCDD6AF14A573F500295AAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4998650415BF305000803E05 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -72,8 +64,8 @@
 		C4C51B541613CE0800959FDC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C4C51B551613CE0800959FDC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4C51B561613CE0800959FDC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		DC246DD118494C5500FDB56C /* TPGamesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPGamesViewController.h; sourceTree = "<group>"; };
-		DC246DD218494C5500FDB56C /* TPGamesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGamesViewController.m; sourceTree = "<group>"; };
+		DC246DD118494C5500FDB56C /* TPGamesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPGamesTableViewController.h; sourceTree = "<group>"; };
+		DC246DD218494C5500FDB56C /* TPGamesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGamesTableViewController.m; sourceTree = "<group>"; };
 		DC246DE218496ABA00FDB56C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		DC246DE318496ABA00FDB56C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		DC246DE418496ABA00FDB56C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -83,10 +75,6 @@
 		DC246DEF18496DF500FDB56C /* TPNewPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNewPointViewController.h; sourceTree = "<group>"; };
 		DC246DF018496DF500FDB56C /* TPNewPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNewPointViewController.m; sourceTree = "<group>"; };
 		DC246DF118496DF500FDB56C /* TPNewPointViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPNewPointViewController.xib; sourceTree = "<group>"; };
-		DC6466BB185337F100835781 /* red-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-circle.png"; sourceTree = "<group>"; };
-		DC6466BC185337F100835781 /* red-circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-circle@2x.png"; sourceTree = "<group>"; };
-		DC6466BD185337F100835781 /* green-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-circle.png"; sourceTree = "<group>"; };
-		DC6466BE185337F100835781 /* green-circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-circle@2x.png"; sourceTree = "<group>"; };
 		DC6466C318533BE800835781 /* APLPositionToBoundsMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLPositionToBoundsMapping.h; sourceTree = "<group>"; };
 		DC6466C418533BE800835781 /* APLPositionToBoundsMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLPositionToBoundsMapping.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,10 +106,10 @@
 		09ABC06213A1D52D009C3FCF = {
 			isa = PBXGroup;
 			children = (
-				DC6466BA185337E300835781 /* Ressources */,
 				09ABC07713A1D52D009C3FCF /* Tennis */,
 				09ABC07013A1D52D009C3FCF /* Frameworks */,
 				09ABC06E13A1D52D009C3FCF /* Products */,
+				DC6466BA185337E300835781 /* Ressources */,
 				DC246DD4184969EA00FDB56C /* Vendor */,
 			);
 			sourceTree = "<group>";
@@ -148,7 +136,6 @@
 				6332375315E438E900AE2736 /* libsqlite3.dylib */,
 				099CCEAC13F9E3760039A464 /* libz.1.1.3.dylib */,
 				092354B613A1D83C00DA740F /* MobileCoreServices.framework */,
-				094AC9FF14367ACD008398F8 /* Parse.framework */,
 				2FCDD6AF14A573F500295AAC /* QuartzCore.framework */,
 				09BEF34B13D51C3F001BBCDB /* Security.framework */,
 				4998650415BF305000803E05 /* StoreKit.framework */,
@@ -161,22 +148,14 @@
 		09ABC07713A1D52D009C3FCF /* Tennis */ = {
 			isa = PBXGroup;
 			children = (
-				DC6466C318533BE800835781 /* APLPositionToBoundsMapping.h */,
-				DC6466C418533BE800835781 /* APLPositionToBoundsMapping.m */,
-				09ABC08013A1D52D009C3FCF /* ParseStarterProjectAppDelegate.h */,
-				09ABC08113A1D52D009C3FCF /* ParseStarterProjectAppDelegate.m */,
-				09ABC08313A1D52D009C3FCF /* MainWindow.xib */,
-				DC246DD118494C5500FDB56C /* TPGamesViewController.h */,
-				DC246DD218494C5500FDB56C /* TPGamesViewController.m */,
-				DC246DE918496B8800FDB56C /* TPPointsTableViewController.h */,
-				DC246DEA18496B8800FDB56C /* TPPointsTableViewController.m */,
-				DC246DEF18496DF500FDB56C /* TPNewPointViewController.h */,
-				DC246DF018496DF500FDB56C /* TPNewPointViewController.m */,
-				DC246DF118496DF500FDB56C /* TPNewPointViewController.xib */,
+				DCD9B8DE1876CE2A009E4332 /* App */,
+				DCD9B8DC1876CDE8009E4332 /* Controllers */,
+				DCD9B8DB1876CD92009E4332 /* Views */,
+				DCD9B8DD1876CDF6009E4332 /* Helpers */,
 				09ABC07813A1D52D009C3FCF /* Supporting Files */,
 			);
 			name = Tennis;
-			path = ParseStarterProject;
+			path = TennisPlusProject;
 			sourceTree = "<group>";
 		};
 		09ABC07813A1D52D009C3FCF /* Supporting Files */ = {
@@ -187,16 +166,16 @@
 				C4C51B551613CE0800959FDC /* Default-568h@2x.png */,
 				09ABC07913A1D52D009C3FCF /* TennisPlus-Info.plist */,
 				09144A7213C2997E00388B00 /* Entitlements.plist */,
-				09ABC07A13A1D52D009C3FCF /* InfoPlist.strings */,
 				09ABC07D13A1D52D009C3FCF /* TennisPlus-Prefix.pch */,
 				09ABC07E13A1D52D009C3FCF /* main.m */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		DC246DD4184969EA00FDB56C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				094AC9FF14367ACD008398F8 /* Parse.framework */,
 				DC246DE118496ABA00FDB56C /* MBProgressHUD */,
 			);
 			name = Vendor;
@@ -216,12 +195,47 @@
 		DC6466BA185337E300835781 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
-				DC6466BB185337F100835781 /* red-circle.png */,
-				DC6466BC185337F100835781 /* red-circle@2x.png */,
-				DC6466BD185337F100835781 /* green-circle.png */,
-				DC6466BE185337F100835781 /* green-circle@2x.png */,
 			);
 			name = Ressources;
+			sourceTree = "<group>";
+		};
+		DCD9B8DB1876CD92009E4332 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DC246DF118496DF500FDB56C /* TPNewPointViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DCD9B8DC1876CDE8009E4332 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DC246DD118494C5500FDB56C /* TPGamesTableViewController.h */,
+				DC246DD218494C5500FDB56C /* TPGamesTableViewController.m */,
+				DC246DE918496B8800FDB56C /* TPPointsTableViewController.h */,
+				DC246DEA18496B8800FDB56C /* TPPointsTableViewController.m */,
+				DC246DEF18496DF500FDB56C /* TPNewPointViewController.h */,
+				DC246DF018496DF500FDB56C /* TPNewPointViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DCD9B8DD1876CDF6009E4332 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DC6466C318533BE800835781 /* APLPositionToBoundsMapping.h */,
+				DC6466C418533BE800835781 /* APLPositionToBoundsMapping.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DCD9B8DE1876CE2A009E4332 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				09ABC08013A1D52D009C3FCF /* TennisPlusProjectAppDelegate.h */,
+				09ABC08113A1D52D009C3FCF /* TennisPlusProjectAppDelegate.m */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,19 +289,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09ABC07C13A1D52D009C3FCF /* InfoPlist.strings in Resources */,
-				09ABC08513A1D52E009C3FCF /* MainWindow.xib in Resources */,
 				DC246DF318496DF500FDB56C /* TPNewPointViewController.xib in Resources */,
-				DC6466C1185337F100835781 /* green-circle.png in Resources */,
 				09144A7313C2997E00388B00 /* Entitlements.plist in Resources */,
 				DC246DE618496ABA00FDB56C /* LICENSE in Resources */,
 				C4C51B571613CE0800959FDC /* Default.png in Resources */,
 				DC246DE818496ABA00FDB56C /* README.mdown in Resources */,
-				DC6466C2185337F100835781 /* green-circle@2x.png in Resources */,
 				C4C51B581613CE0800959FDC /* Default-568h@2x.png in Resources */,
 				C4C51B591613CE0800959FDC /* Default@2x.png in Resources */,
-				DC6466BF185337F100835781 /* red-circle.png in Resources */,
-				DC6466C0185337F100835781 /* red-circle@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,33 +309,14 @@
 				DC246DF218496DF500FDB56C /* TPNewPointViewController.m in Sources */,
 				09ABC07F13A1D52D009C3FCF /* main.m in Sources */,
 				DC246DEB18496B8800FDB56C /* TPPointsTableViewController.m in Sources */,
-				09ABC08213A1D52D009C3FCF /* ParseStarterProjectAppDelegate.m in Sources */,
+				09ABC08213A1D52D009C3FCF /* TennisPlusProjectAppDelegate.m in Sources */,
 				DC6466C518533BE800835781 /* APLPositionToBoundsMapping.m in Sources */,
-				DC246DD318494C5500FDB56C /* TPGamesViewController.m in Sources */,
+				DC246DD318494C5500FDB56C /* TPGamesTableViewController.m in Sources */,
 				DC246DE718496ABA00FDB56C /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		09ABC07A13A1D52D009C3FCF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09ABC07B13A1D52D009C3FCF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		09ABC08313A1D52D009C3FCF /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09ABC08413A1D52E009C3FCF /* en */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		09ABC08C13A1D52E009C3FCF /* Debug */ = {

@@ -1,6 +1,6 @@
 #import <Parse/Parse.h>
-#import "ParseStarterProjectAppDelegate.h"
-#import "TPGamesViewController.h"
+#import "TennisPlusProjectAppDelegate.h"
+#import "TPGamesTableViewController.h"
 
 
 @implementation ParseStarterProjectAppDelegate
@@ -29,7 +29,7 @@
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     // Override point for customization after application launch.
-    TPGamesViewController *rootViewController = [[TPGamesViewController alloc] initWithStyle:UITableViewStylePlain];
+    TPGamesTableViewController *rootViewController = [[TPGamesTableViewController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController *rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 
     self.window.tintColor = [UIColor greenColor];

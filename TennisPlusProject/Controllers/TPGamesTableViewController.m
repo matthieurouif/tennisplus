@@ -6,15 +6,15 @@
 //
 //
 
-#import "TPGamesViewController.h"
+#import "TPGamesTableViewController.h"
 #import "MBProgressHUD.h"
 #import "TPPointsTableViewController.h"
 
-@interface TPGamesViewController ()
+@interface TPGamesTableViewController ()
 
 @end
 
-@implementation TPGamesViewController
+@implementation TPGamesTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
