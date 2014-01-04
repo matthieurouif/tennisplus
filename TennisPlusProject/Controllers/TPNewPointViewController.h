@@ -8,39 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "TPPoint.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface TPNewPointViewController : UIViewController <UICollisionBehaviorDelegate>
-{
-    PFObject *game;
-    
-    int serviceType;
-    int server;
-    int winner;
-    int endingEvent;
-}
 
-typedef enum {
-    FirstPlayerId                             = 1,
-    SecondPlayerId                            = 2,
-} PlayerId;
-
-typedef enum {
-    ServingTypeFirstServe                   = 1,
-    ServingTypeSecondServe                  = 2,
-    ServingTypeDoubleFault                  = 3,
-} ServingType;
-
-typedef enum {
-    EndingEventWinnerShot                             = 1,
-    EndingEventUnforcedError                          = 2,
-    EndingEventDoubleFault                            = 3,
-} EndingEvent;
-
-@property (nonatomic, retain) PFObject * game;
+@property (nonatomic, retain) PFObject *match;
+@property (nonatomic, retain) TPPoint *currentPoint;
+@property (nonatomic, retain) TPPoint *previousPoint;
 
 -(IBAction)save:(id)sender;
 
 -(IBAction)changeServiceType:(id)sender;
+-(IBAction)deleteLastPoint:(id)sender;
 -(IBAction)unforcedErrorAction:(id)sender;
 -(IBAction)winnerAction:(id)sender;
 

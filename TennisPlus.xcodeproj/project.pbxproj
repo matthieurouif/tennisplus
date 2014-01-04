@@ -32,6 +32,8 @@
 		DC246DF218496DF500FDB56C /* TPNewPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC246DF018496DF500FDB56C /* TPNewPointViewController.m */; };
 		DC246DF318496DF500FDB56C /* TPNewPointViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC246DF118496DF500FDB56C /* TPNewPointViewController.xib */; };
 		DC6466C518533BE800835781 /* APLPositionToBoundsMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6466C418533BE800835781 /* APLPositionToBoundsMapping.m */; };
+		DCCB428D1876F83D0067457F /* TPPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCB428C1876F83D0067457F /* TPPoint.m */; };
+		DCCB429518775E520067457F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCB429418775E520067457F /* AVFoundation.framework */; };
 		DCD9B8DF1876D48E009E4332 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094AC9FF14367ACD008398F8 /* Parse.framework */; };
 		DCD9B8E11876D9A0009E4332 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD9B8E01876D9A0009E4332 /* MainWindow.xib */; };
 		DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E18B1E1624CB5700B17A67 /* CoreLocation.framework */; };
@@ -78,6 +80,9 @@
 		DC246DF118496DF500FDB56C /* TPNewPointViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TPNewPointViewController.xib; sourceTree = "<group>"; };
 		DC6466C318533BE800835781 /* APLPositionToBoundsMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLPositionToBoundsMapping.h; sourceTree = "<group>"; };
 		DC6466C418533BE800835781 /* APLPositionToBoundsMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLPositionToBoundsMapping.m; sourceTree = "<group>"; };
+		DCCB428B1876F83D0067457F /* TPPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPoint.h; sourceTree = "<group>"; };
+		DCCB428C1876F83D0067457F /* TPPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPoint.m; sourceTree = "<group>"; };
+		DCCB429418775E520067457F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DCD9B8E01876D9A0009E4332 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCCB429518775E520067457F /* AVFoundation.framework in Frameworks */,
 				DCD9B8DF1876D48E009E4332 /* Parse.framework in Frameworks */,
 				DD952FCB16E7F5CF00470144 /* CoreLocation.framework in Frameworks */,
 				4998650515BF305000803E05 /* StoreKit.framework in Frameworks */,
@@ -127,6 +133,7 @@
 		09ABC07013A1D52D009C3FCF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DCCB429418775E520067457F /* AVFoundation.framework */,
 				6372FF571613CC47002132AF /* AdSupport.framework */,
 				6372FF551613CC42002132AF /* Social.framework */,
 				6372FF521613CC3C002132AF /* Accounts.framework */,
@@ -150,6 +157,7 @@
 		09ABC07713A1D52D009C3FCF /* Tennis */ = {
 			isa = PBXGroup;
 			children = (
+				DCD9B8E21876F6EA009E4332 /* Models */,
 				09ABC07D13A1D52D009C3FCF /* TennisPlus-Prefix.pch */,
 				DCD9B8DE1876CE2A009E4332 /* App */,
 				DCD9B8DC1876CDE8009E4332 /* Controllers */,
@@ -242,6 +250,15 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		DCD9B8E21876F6EA009E4332 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DCCB428B1876F83D0067457F /* TPPoint.h */,
+				DCCB428C1876F83D0067457F /* TPPoint.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -313,6 +330,7 @@
 			files = (
 				DC246DF218496DF500FDB56C /* TPNewPointViewController.m in Sources */,
 				09ABC07F13A1D52D009C3FCF /* main.m in Sources */,
+				DCCB428D1876F83D0067457F /* TPPoint.m in Sources */,
 				DC246DEB18496B8800FDB56C /* TPPointsTableViewController.m in Sources */,
 				09ABC08213A1D52D009C3FCF /* TennisPlusProjectAppDelegate.m in Sources */,
 				DC6466C518533BE800835781 /* APLPositionToBoundsMapping.m in Sources */,

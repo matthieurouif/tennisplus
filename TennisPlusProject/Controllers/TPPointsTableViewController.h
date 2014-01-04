@@ -10,9 +10,9 @@
 
 @interface TPPointsTableViewController : PFQueryTableViewController
 {
-    PFObject * game;
+    PFObject * match;
 }
 
-@property (nonatomic, retain) PFObject * game;
+@property (nonatomic, retain) PFObject * match;
 
 @end

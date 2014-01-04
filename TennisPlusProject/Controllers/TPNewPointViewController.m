@@ -17,13 +17,18 @@
 @property (nonatomic, strong) UIAttachmentBehavior  *attachmentBehavior;
 @property (nonatomic, strong) IBOutlet UIButton     *firstPlayerWinButton;
 @property (nonatomic, strong) IBOutlet UIButton     *secondPlayerWinButton;
-@property (nonatomic, strong) IBOutlet UIButton     *serviceStateButton;
+@property (nonatomic, strong) IBOutlet UIButton     *firstServiceStateButton;
+@property (nonatomic, strong) IBOutlet UIButton     *secondServiceStateButton;
+
+
+-(void)newCurrentPoint;
 
 @end
 
 @implementation TPNewPointViewController
 
-@synthesize game;
+
+@synthesize match;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,17 +45,24 @@
     [super viewDidLoad];
     
     [_firstPlayerWinButton setTintColor:[UIColor whiteColor]];
-    _firstPlayerWinButton.titleLabel.textAlignment = _secondPlayerWinButton.titleLabel.textAlignment = _serviceStateButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _firstPlayerWinButton.titleLabel.textAlignment = _secondPlayerWinButton.titleLabel.textAlignment = _firstServiceStateButton.titleLabel.textAlignment = _secondServiceStateButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _firstPlayerWinButton.titleLabel.numberOfLines = _secondPlayerWinButton.titleLabel.numberOfLines = 0;
     [_secondPlayerWinButton setTintColor:[UIColor whiteColor]];
-    [_serviceStateButton setTintColor:[UIColor whiteColor]];
+    [_firstServiceStateButton setTintColor:[UIColor whiteColor]];
+    [_secondServiceStateButton setTintColor:[UIColor whiteColor]];
 
     [_firstPlayerWinButton setBackgroundColor:[UIColor redColor]];
     [_secondPlayerWinButton setBackgroundColor:[UIColor blueColor]];
-    [_serviceStateButton setBackgroundColor:[UIColor orangeColor]];
+    [_secondServiceStateButton setBackgroundColor:[UIColor orangeColor]];
+    [_firstServiceStateButton setBackgroundColor:[UIColor orangeColor]];
 
     
-    serviceType = 0;
+    _currentPoint.servingType = 0;
+    [self newCurrentPoint];
+    _currentPoint[@"match"] = self.match;
+    
     [self updateServiceTypeDisplay];
+    [self updateScore];
     // Do any additional setup after loading the view from its nib.
     /*UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.firstPlayerWinButton]];
@@ -59,9 +71,8 @@
     collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
     collisionBehavior.collisionDelegate = self;
     [animator addBehavior:collisionBehavior];
-    
     self.animator = animator;*/
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,7 +89,7 @@
 //
 - (IBAction)handleFirstButtonAttachmentGesture:(UIPanGestureRecognizer*)gesture
 {
-    winner = FirstPlayerId;
+    _currentPoint.winner = FirstPlayerId;
     
     if(gesture.state == UIGestureRecognizerStateEnded)
     {
@@ -99,7 +110,7 @@
 
 - (IBAction)handleSecondButtonAttachmentGesture:(UIPanGestureRecognizer*)gesture
 {
-    winner = SecondPlayerId;
+    _currentPoint.winner = SecondPlayerId;
     
     if(gesture.state == UIGestureRecognizerStateEnded){
         CGPoint velocity = [gesture velocityInView:self.view];
@@ -120,49 +131,67 @@
 
 -(IBAction)unforcedErrorAction:(id)sender
 {
-    endingEvent = EndingEventUnforcedError;
+    _currentPoint.endingEvent = EndingEventUnforcedError;
 }
 
 -(IBAction)winnerAction:(id)sender
 {
-    endingEvent = EndingEventWinnerShot;
+    _currentPoint.endingEvent = EndingEventWinnerShot;
 }
+
+-(IBAction)forcedErrorAction:(id)sender
+{
+    if(sender == _firstPlayerWinButton)
+        _currentPoint.winner = FirstPlayerId;
+    else if(sender == _secondPlayerWinButton)
+        _currentPoint.winner = SecondPlayerId;
+    
+    _currentPoint.endingEvent = EndingEventForcedError;
+    [self save:nil];
+}
+
 
 -(void)updateServiceTypeDisplay
 {
-    switch (serviceType) {
+    NSString *serviceDescription;
+    switch (_currentPoint.servingType) {
         case ServingTypeFirstServe:
-            [_serviceStateButton setTitle:NSLocalizedString(@"1st Serve", @"Description of first service state") forState:UIControlStateNormal];
+            serviceDescription = NSLocalizedString(@"1st Serve", @"Description of first service state");
             break;
         case ServingTypeSecondServe:
-            [_serviceStateButton setTitle:NSLocalizedString(@"2nd Serve", @"Description of second service state") forState:UIControlStateNormal];
+            serviceDescription =  NSLocalizedString(@"2nd Serve", @"Description of second service state");
             break;
         case ServingTypeDoubleFault:
-            [_serviceStateButton setTitle:NSLocalizedString(@"Double Fault", @"Description of double fault service state") forState:UIControlStateNormal];
+            serviceDescription = NSLocalizedString(@"Double Fault", @"Description of double fault service state");
             break;
         default:
-            [_serviceStateButton setTitle:NSLocalizedString(@"Ready", @"Description of ready service state") forState:UIControlStateNormal];
+            serviceDescription = NSLocalizedString(@"Ready", @"Description of ready service state");
             break;
     }
     
-    if(serviceType == ServingTypeDoubleFault){
-        switch (server)
+    [_firstServiceStateButton setTitle:serviceDescription forState:UIControlStateNormal];
+    [_secondServiceStateButton setTitle:serviceDescription forState:UIControlStateNormal];
+
+    if(_currentPoint.servingType == ServingTypeDoubleFault){
+        switch (_currentPoint.server)
         {
                 //if we don't know the server, we can't record the point
             case -1:{
                 //restor the SegmentControl
-                serviceType = UISegmentedControlNoSegment;
+                _currentPoint.servingType = UISegmentedControlNoSegment;
                 [[[UIAlertView alloc] initWithTitle:@"No server assigned" message:@"Assign a server" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             }
                 break;
-            case 0:{
+            case FirstPlayerId:{
                 //if first player was serving, player 2 wins
-                [self save:_secondPlayerWinButton];
+                _currentPoint.winner = SecondPlayerId;
+                [self save:nil];
             }
                 break;
-            case 1:{
+            case SecondPlayerId:{
                 //if first player was serving, player 2 wins
-                [self save:_firstPlayerWinButton];
+                _currentPoint.winner = FirstPlayerId;
+                [self save:nil];
             }
                 break;
                 
@@ -170,12 +199,76 @@
     }
 }
 
+-(void)updateScore{
+    
+    if(_currentPoint.server == FirstPlayerId){
+        _firstServiceStateButton.hidden = NO;
+        _secondServiceStateButton.hidden = YES;
+    }
+    else{
+        _firstServiceStateButton.hidden = YES;
+        _secondServiceStateButton.hidden = NO;
+    }
+
+
+    
+    
+    NSMutableAttributedString *firstPlayerButtonAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"player 1\n%@\n%d",[_currentPoint readablePlayer1PointScore],_currentPoint.p1GameBefore]];
+    [firstPlayerButtonAttributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:100] range:[firstPlayerButtonAttributedString.string rangeOfString:[_currentPoint readablePlayer1PointScore]]];
+    [_firstPlayerWinButton setAttributedTitle:firstPlayerButtonAttributedString forState:UIControlStateNormal];
+    
+    NSMutableAttributedString *secondPlayerButtonAttributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d\n%@\nplayer 2",_currentPoint.p2GameBefore,[_currentPoint readablePlayer2PointScore]]];
+    [secondPlayerButtonAttributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:100] range:[secondPlayerButtonAttributedString.string rangeOfString:[_currentPoint readablePlayer2PointScore]]];
+    [_secondPlayerWinButton setAttributedTitle:secondPlayerButtonAttributedString forState:UIControlStateNormal];
+    
+    AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc]init];
+    NSString *audibleText;
+    
+    if((_currentPoint.p1GameBefore + _currentPoint.p2GameBefore) != (_previousPoint.p1GameBefore + _previousPoint.p2GameBefore))
+    {
+        audibleText = (_currentPoint.server == FirstPlayerId)?
+        [NSString stringWithFormat:@"%d %d",_currentPoint.p1GameBefore,_currentPoint.p2GameBefore]:
+        [NSString stringWithFormat:@"%d %d",_currentPoint.p2GameBefore,_currentPoint.p1GameBefore];
+    }
+    else
+    {
+        audibleText = (_currentPoint.server == FirstPlayerId)?
+        [NSString stringWithFormat:@"%@ %@",[_currentPoint audiblePlayer1PointScore],[_currentPoint audiblePlayer2PointScore]]:
+        [NSString stringWithFormat:@"%@ %@",[_currentPoint audiblePlayer2PointScore],[_currentPoint audiblePlayer1PointScore]];
+    }
+    
+    
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:audibleText];
+    [utterance setRate:0.4f];
+    [synthesizer speakUtterance:utterance];
+    
+}
+
 -(IBAction)changeServiceType:(id)sender
 {
     //if we have a double fault
-    serviceType += 1;
+    _currentPoint.servingType += 1;
     [self updateServiceTypeDisplay];
     
+}
+
+-(IBAction)deleteLastPoint:(id)sender
+{
+    _currentPoint = [TPPoint object];
+    _currentPoint.p1PointBefore = _previousPoint.p1PointBefore;
+    _currentPoint.p2PointBefore = _previousPoint.p2PointBefore;
+    _currentPoint.p1GameBefore = _previousPoint.p1GameBefore;
+    _currentPoint.p2GameBefore = _previousPoint.p2GameBefore;
+    _currentPoint.p1SetBefore = _previousPoint.p1SetBefore;
+    _currentPoint.p2SetBefore = _previousPoint.p2PointBefore;
+    _currentPoint.server = _previousPoint.server;
+    
+    [_previousPoint deleteEventually];
+    
+    [self updateServiceTypeDisplay];
+    [self updateScore];
+
+    //should be able to delte more than one point
 }
 
 -(IBAction)addAttachment:(id)sender
@@ -203,89 +296,52 @@
     
 }
 
+-(void)newCurrentPoint
+{
+    if(_previousPoint)
+    {
+        _currentPoint = [TPPoint object];
+        TPPoint *tempPoint = [_previousPoint resultingScore];
+        _currentPoint.p1PointBefore = tempPoint.p1PointBefore;
+        _currentPoint.p2PointBefore = tempPoint.p2PointBefore;
+        _currentPoint.p1GameBefore = tempPoint.p1GameBefore;
+        _currentPoint.p2GameBefore = tempPoint.p2GameBefore;
+        _currentPoint.p1SetBefore = tempPoint.p1SetBefore;
+        _currentPoint.p2SetBefore = tempPoint.p2PointBefore;
+        _currentPoint.server = _previousPoint.server;
+    }
+    else
+    {
+        _currentPoint = [TPPoint startingPoint];
+    }
+}
 
 -(IBAction)save:(id)sender
 {
-    PFObject * point = [PFObject objectWithClassName:@"Point"];
-    point[@"game"] = game;
-    [game incrementKey:@"pointsCount"];
-    NSString *keyToIncrementWinner;
-    NSString *keyToIncrementService;
+    [_currentPoint incrementMatchCounters];
+    _previousPoint = _currentPoint;
+    [self newCurrentPoint];
     
-    if(sender == _firstPlayerWinButton || winner == FirstPlayerId){
-        point[@"winning"] = [NSNumber numberWithInt:FirstPlayerId];
-        keyToIncrementWinner = @"WinP1";
+    _currentPoint[@"match"] = self.match;
+
+    //if a game was won change server
+    if ((_currentPoint.p1GameBefore + _currentPoint.p2GameBefore) > (_previousPoint.p1GameBefore + _previousPoint.p2GameBefore))
+    {
+        //as FirstPlayerId + SecondPlayerId = 3;
+        _currentPoint.server = 3 - _previousPoint.server;
     }
-    else if(sender == _secondPlayerWinButton || winner == SecondPlayerId){
-        point[@"winning"] = [NSNumber numberWithInt:SecondPlayerId];
-        keyToIncrementWinner = @"WinP2";
-    }
-    
-    switch (server){
-        case 0:{
-            point[@"serving"] = [NSNumber numberWithInt:FirstPlayerId];
-            keyToIncrementService = @"ServiceP1";
-        }
-            break;
-        case 1:{
-            point[@"serving"] = [NSNumber numberWithInt:SecondPlayerId];
-            keyToIncrementService = @"ServiceP2";
-        }
-            break;
-    }
-    
-    
-    switch (serviceType){
-        case ServingTypeFirstServe:{
-            point[@"servingType"] = [NSNumber numberWithInt:ServingTypeFirstServe];
-            keyToIncrementService = [keyToIncrementService stringByAppendingString:@"1st"];
-        }
-            break;
-        case ServingTypeSecondServe:{
-            point[@"servingType"] = [NSNumber numberWithInt:ServingTypeSecondServe];
-            keyToIncrementService = [keyToIncrementService stringByAppendingString:@"2nd"];
-        }
-            break;
-        case ServingTypeDoubleFault:{
-            point[@"servingType"] = [NSNumber numberWithInt:ServingTypeDoubleFault];
-            keyToIncrementService = [keyToIncrementService stringByAppendingString:@"Double"];
-            
-            //also increment the edingEvent
-            keyToIncrementWinner = [keyToIncrementWinner stringByAppendingString:@"DoubleFault"];
-            point[@"endingEvent"] = [NSNumber numberWithInt:EndingEventDoubleFault];
-        }
-            break;
-    }
-    
-    
-    switch (endingEvent){
-        case EndingEventWinnerShot:{
-            keyToIncrementWinner = [keyToIncrementWinner stringByAppendingString:@"WinnerShot"];
-            point[@"endingEvent"] = [NSNumber numberWithInt:EndingEventWinnerShot];
-        }
-            break;
-        case EndingEventUnforcedError:{
-            point[@"endingEvent"] = [NSNumber numberWithInt:EndingEventUnforcedError];
-            keyToIncrementWinner = [keyToIncrementWinner stringByAppendingString:@"UnforcedError"];
-        }
-            break;
-    }
-    
-    [game incrementKey:keyToIncrementWinner];
-    [game incrementKey:keyToIncrementService];
-            
-    endingEvent = 0;
-    serviceType = 0;
+        
     [self updateServiceTypeDisplay];
-    
+    [self updateScore];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = [NSString stringWithFormat:@"Loading %@ %@",keyToIncrementWinner,keyToIncrementService];
+    hud.labelText = [NSString stringWithFormat:@"Loading"];
 
-    [point saveEventually:^(BOOL succeeded, NSError *error) {
+    [_previousPoint saveEventually:^(BOOL succeeded, NSError *error) {
         [hud hide:YES];
     }];
-    [game saveInBackground];
-    }
+    [match saveInBackground];
+}
 
 @end

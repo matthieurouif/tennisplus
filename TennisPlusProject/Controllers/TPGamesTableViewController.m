@@ -20,7 +20,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // The className to query on
-        self.parseClassName = @"Game";
+        self.parseClassName = @"TPMatch";
         
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
@@ -109,9 +109,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < self.objects.count)
     {
-        PFObject *aGame = [self.objects objectAtIndex:indexPath.row];
+        PFObject *aMatch = [self.objects objectAtIndex:indexPath.row];
         TPPointsTableViewController * pointsTableViewController = [[TPPointsTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        pointsTableViewController.game = aGame;
+        pointsTableViewController.match = aMatch;
         [self.navigationController pushViewController:pointsTableViewController animated:YES];
 
     }
@@ -139,30 +139,30 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
     
-    PFObject *aGame = [self.objects objectAtIndex:indexPath.row];
+    PFObject *aMatch = [self.objects objectAtIndex:indexPath.row];
     cell.detailTextLabel.numberOfLines = 7;
     
-    NSNumber *ServiceP11st = [aGame objectForKey:@"ServiceP11st"];
-    NSNumber *ServiceP12nd = [aGame objectForKey:@"ServiceP12nd"];
-    NSNumber *ServiceP1Double = [aGame objectForKey:@"ServiceP1Double"];
-    NSNumber *ServiceP1Unknown = [aGame objectForKey:@"ServiceP1"];
+    NSNumber *ServiceP11st = [aMatch objectForKey:@"ServiceP11st"];
+    NSNumber *ServiceP12nd = [aMatch objectForKey:@"ServiceP12nd"];
+    NSNumber *ServiceP1Double = [aMatch objectForKey:@"ServiceP1Double"];
+    NSNumber *ServiceP1Unknown = [aMatch objectForKey:@"ServiceP1"];
 
-    NSNumber *ServiceP21st = [aGame objectForKey:@"ServiceP21st"];
-    NSNumber *ServiceP22nd = [aGame objectForKey:@"ServiceP22nd"];
-    NSNumber *ServiceP2Double = [aGame objectForKey:@"ServiceP2Double"];
-    NSNumber *ServiceP2Unknown = [aGame objectForKey:@"ServiceP2"];
+    NSNumber *ServiceP21st = [aMatch objectForKey:@"ServiceP21st"];
+    NSNumber *ServiceP22nd = [aMatch objectForKey:@"ServiceP22nd"];
+    NSNumber *ServiceP2Double = [aMatch objectForKey:@"ServiceP2Double"];
+    NSNumber *ServiceP2Unknown = [aMatch objectForKey:@"ServiceP2"];
 
-    NSNumber *pointP1Winner = [aGame objectForKey:@"WinP1WinnerShot"];
-    NSNumber *pointP1UnforcedError = [aGame objectForKey:@"WinP2UnforcedError"];
-    NSNumber *pointP1DoubleFault = [aGame objectForKey:@"WinP2DoubleFault"];
-    NSNumber *pointP1ForcedError = [aGame objectForKey:@"WinP1"];
+    NSNumber *pointP1Winner = [aMatch objectForKey:@"WinP1WinnerShot"];
+    NSNumber *pointP1UnforcedError = [aMatch objectForKey:@"WinP2UnforcedError"];
+    NSNumber *pointP1DoubleFault = [aMatch objectForKey:@"WinP2DoubleFault"];
+    NSNumber *pointP1ForcedError = [aMatch objectForKey:@"WinP1"];
 
-    NSNumber *pointP2Winner = [aGame objectForKey:@"WinP2WinnerShot"];
-    NSNumber *pointP2UnforcedError = [aGame objectForKey:@"WinP1UnforcedError"];
-    NSNumber *pointP2DoubleFault = [aGame objectForKey:@"WinP1DoubleFault"];
-    NSNumber *pointP2ForcedError = [aGame objectForKey:@"WinP2"];
+    NSNumber *pointP2Winner = [aMatch objectForKey:@"WinP2WinnerShot"];
+    NSNumber *pointP2UnforcedError = [aMatch objectForKey:@"WinP1UnforcedError"];
+    NSNumber *pointP2DoubleFault = [aMatch objectForKey:@"WinP1DoubleFault"];
+    NSNumber *pointP2ForcedError = [aMatch objectForKey:@"WinP2"];
 
-    NSNumber  *pointsCount = [aGame objectForKey:@"pointsCount"];
+    NSNumber  *pointsCount = [aMatch objectForKey:@"pointsCount"];
     CGFloat   player1ServiceCount = ServiceP11st.intValue + ServiceP12nd.intValue + ServiceP1Double.intValue + ServiceP1Unknown.intValue;
     CGFloat   player2ServiceCount = ServiceP21st.intValue + ServiceP22nd.intValue + ServiceP2Double.intValue + ServiceP2Unknown.intValue;
     CGFloat   player1PointsCount = pointP1Winner.intValue + pointP2UnforcedError.intValue + pointP2DoubleFault.intValue + pointP1ForcedError.intValue;
@@ -190,7 +190,7 @@
                                          100*pointP2UnforcedError.floatValue/pointsCount.floatValue,
                                          100*pointP2DoubleFault.floatValue/pointsCount.floatValue];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ vs %@,(%.f points)",[PFUser currentUser].username, aGame[@"player2Name"],pointsCount.floatValue];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ vs %@,(%.f points)",[PFUser currentUser].username, aMatch[@"player2Name"],pointsCount.floatValue];
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@\n\n%@\n%@",
                                  player1PointInformation,

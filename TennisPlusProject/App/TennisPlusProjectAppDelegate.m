@@ -1,7 +1,7 @@
 #import <Parse/Parse.h>
 #import "TennisPlusProjectAppDelegate.h"
 #import "TPGamesTableViewController.h"
-
+#import "TPPoint.h"
 
 @implementation TennisPlusProjectAppDelegate
 
@@ -11,6 +11,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // ****************************************************************************
     // Uncomment and fill in with your Parse credentials:
+    [TPPoint registerSubclass];
+    
     [Parse setApplicationId:@"PYLtcqAz8jzrRDChEnh3FBuwBCKRhvc0HTo0Ql0J"
                   clientKey:@"A0TphYSRhlxltAFAkgTfKTmoD9dUbdvgAayjtjC0"];
     //
@@ -32,7 +34,7 @@
     TPGamesTableViewController *rootViewController = [[TPGamesTableViewController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController *rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 
-    self.window.tintColor = [UIColor greenColor];
+    self.window.tintColor = [UIColor darkGrayColor];
     self.window.rootViewController = rootNavigationController;
     [self.window makeKeyAndVisible];
 

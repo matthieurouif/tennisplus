@@ -8,8 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TPNewPointViewController">
             <connections>
                 <outlet property="firstPlayerWinButton" destination="1xy-93-4yX" id="B6k-t5-QMF"/>
+                <outlet property="firstServiceStateButton" destination="ziJ-Ef-P0R" id="zsg-FP-dVD"/>
                 <outlet property="secondPlayerWinButton" destination="nPI-dy-7oE" id="gOk-a5-kus"/>
-                <outlet property="serviceStateButton" destination="Lcq-Wf-eBX" id="81c-Fk-12y"/>
+                <outlet property="secondServiceStateButton" destination="Lcq-Wf-eBX" id="qPG-Fu-H7Y"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -18,45 +19,83 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xy-93-4yX">
-                    <rect key="frame" x="0.0" y="139" width="320" height="210"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xy-93-4yX">
+                    <rect key="frame" x="0.0" y="66" width="320" height="247"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <gestureRecognizers/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                     <state key="normal" title="Player 1"/>
                     <connections>
+                        <action selector="forcedErrorAction:" destination="-1" eventType="touchUpInside" id="8zO-QO-qjV"/>
                         <outletCollection property="gestureRecognizers" destination="ga9-kE-SlY" appends="YES" id="ZNJ-kW-onP"/>
                     </connections>
                 </button>
-                <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPI-dy-7oE">
-                    <rect key="frame" x="0.0" y="357" width="320" height="210"/>
+                <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nPI-dy-7oE">
+                    <rect key="frame" x="0.0" y="321" width="320" height="246"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <gestureRecognizers/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                     <state key="normal" title="Player 2"/>
                     <connections>
+                        <action selector="forcedErrorAction:" destination="-1" eventType="touchUpInside" id="et6-Kh-uEw"/>
                         <outletCollection property="gestureRecognizers" destination="Sqc-gt-IA7" appends="YES" id="rSp-Cb-94h"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcq-Wf-eBX">
-                    <rect key="frame" x="0.0" y="66" width="320" height="73"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcq-Wf-eBX">
+                    <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="ino-RB-082"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
                     <state key="normal" title="1st Service">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="changeServiceType:" destination="-1" eventType="touchUpInside" id="8UX-ev-83Z"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziJ-Ef-P0R">
+                    <rect key="frame" x="0.0" y="65" width="320" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="SnX-Tf-cx6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                    <state key="normal" title="1st Service">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeServiceType:" destination="-1" eventType="touchUpInside" id="11U-nA-unm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="1xy-93-4yX" secondAttribute="trailing" id="2Xc-qn-4H4"/>
+                <constraint firstItem="ziJ-Ef-P0R" firstAttribute="top" secondItem="1" secondAttribute="top" constant="65" id="5ho-yO-pei"/>
+                <constraint firstItem="1xy-93-4yX" firstAttribute="height" secondItem="nPI-dy-7oE" secondAttribute="height" id="6Xd-Dr-HwS"/>
+                <constraint firstItem="Lcq-Wf-eBX" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="8Yg-rv-SuA"/>
+                <constraint firstAttribute="bottom" secondItem="Lcq-Wf-eBX" secondAttribute="bottom" id="CzB-iy-qi1"/>
+                <constraint firstAttribute="bottom" secondItem="nPI-dy-7oE" secondAttribute="bottom" constant="1" id="ONe-dS-Ctf"/>
+                <constraint firstItem="1xy-93-4yX" firstAttribute="top" secondItem="1" secondAttribute="top" constant="66" id="QCc-Oe-omc"/>
+                <constraint firstItem="1xy-93-4yX" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="XQd-32-aP7"/>
+                <constraint firstItem="nPI-dy-7oE" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ZtB-cZ-e0y"/>
+                <constraint firstItem="nPI-dy-7oE" firstAttribute="top" secondItem="1xy-93-4yX" secondAttribute="bottom" constant="8" id="cbP-qN-qc9"/>
+                <constraint firstAttribute="trailing" secondItem="Lcq-Wf-eBX" secondAttribute="trailing" id="gZM-X9-lhT"/>
+                <constraint firstAttribute="trailing" secondItem="ziJ-Ef-P0R" secondAttribute="trailing" id="jmq-cj-hfH"/>
+                <constraint firstItem="ziJ-Ef-P0R" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="kmu-75-BlO"/>
+                <constraint firstAttribute="trailing" secondItem="nPI-dy-7oE" secondAttribute="trailing" id="vXf-nI-2J9"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="VbW-Gh-s5A" appends="YES" id="t5Q-Un-C3i"/>
+                <outletCollection property="gestureRecognizers" destination="vt1-er-e6m" appends="YES" id="Lij-q1-iE4"/>
             </connections>
         </view>
         <tapGestureRecognizer numberOfTouchesRequired="2" id="VbW-Gh-s5A">
@@ -74,5 +113,10 @@
                 <action selector="handleSecondButtonAttachmentGesture:" destination="-1" id="TlA-Pm-9fA"/>
             </connections>
         </panGestureRecognizer>
+        <tapGestureRecognizer numberOfTouchesRequired="3" id="vt1-er-e6m">
+            <connections>
+                <action selector="deleteLastPoint:" destination="-1" id="1Ro-kr-EDq"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

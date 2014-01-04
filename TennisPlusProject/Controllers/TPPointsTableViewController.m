@@ -9,16 +9,17 @@
 #import "TPPointsTableViewController.h"
 #import "MBProgressHUD.h"
 #import "TPNewPointViewController.h"
+#import "TPPoint.h"
 
 @implementation TPPointsTableViewController
 
-@synthesize game;
+@synthesize match;
 
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // The className to query on
-        self.parseClassName = @"Point";
+        self.parseClassName = [TPPoint parseClassName];
         
         // Whether the built-in pull-to-refresh is enabled
         self.pullToRefreshEnabled = YES;
@@ -27,7 +28,7 @@
         self.paginationEnabled = YES;
         
         // The number of objects to show per page
-        self.objectsPerPage = 15;
+        self.objectsPerPage = 50;
         
     }
     return self;
@@ -36,7 +37,10 @@
 -(void)addPoint:(id)sender
 {
     TPNewPointViewController * newPointViewController = [[TPNewPointViewController alloc] initWithNibName:@"TPNewPointViewController" bundle:nil];
-    newPointViewController.game = self.game;
+    if(self.objects.count > 0)
+        newPointViewController.previousPoint = [self.objects objectAtIndex:0];
+    
+    newPointViewController.match = self.match;
     [self.navigationController pushViewController:newPointViewController animated:YES];
 }
 
@@ -56,7 +60,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPoint:)];
     self.navigationItem.rightBarButtonItems = @[self.editButtonItem,addButton];
 
-    NSNumber  *pointsCount = [game objectForKey:@"pointsCount"];
+    NSNumber  *pointsCount = [match objectForKey:@"pointsCount"];
     self.title = [NSString stringWithFormat:@"%d points",pointsCount.intValue];
 
 
@@ -66,7 +70,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSNumber  *pointsCount = [game objectForKey:@"pointsCount"];
+    NSNumber  *pointsCount = [match objectForKey:@"pointsCount"];
     self.title = [NSString stringWithFormat:@"%d points",pointsCount.intValue];
 }
 
@@ -114,10 +118,27 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
     
-    PFObject *aPoint = [self.objects objectAtIndex:indexPath.row];
-    NSNumber *value = aPoint[@"winning"];
-    cell.textLabel.text = value.stringValue;
-    cell.detailTextLabel.text = aPoint[@"ender"];
+    TPPoint *aPoint = [self.objects objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"starting score: %@-%@ (%d/%d)",[aPoint readablePlayer1PointScore],[aPoint readablePlayer2PointScore],aPoint.p1GameBefore,aPoint.p2GameBefore];
+    
+    NSString *description;
+    switch (aPoint.endingEvent) {
+        case EndingEventForcedError:
+            description = @"Faute provoquée";
+            break;
+        case EndingEventWinnerShot:
+            description = @"Point gagnant";
+            break;
+        case EndingEventUnforcedError:
+            description = @"Faute directe";
+            break;
+        case EndingEventDoubleFault:
+            description = @"Double faute";
+            break;
+        default:
+            break;
+    }
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Player %d wins on %@",aPoint.winner,description];
     
     return cell;
 }
@@ -136,13 +157,13 @@
     
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     
-    if (game) {
-        [query whereKey:@"game" equalTo:self.game];
+    if (match) {
+        [query whereKey:@"match" equalTo:self.match];
     }
     else{
-        self.game = [PFObject objectWithClassName:@"Game"];
-        game[@"player1"] = [PFUser currentUser];
-        [game saveEventually];
+        self.match = [PFObject objectWithClassName:@"TPMatch"];
+        match[@"player1"] = [PFUser currentUser];
+        [match saveEventually];
         [query setLimit:0];
         return query;
     }
