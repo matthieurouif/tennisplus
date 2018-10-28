@@ -1,6 +1,6 @@
 # Tennis Plus
 
-Tennis Plus is a quantified seld app for tennis player. It helps you track your progress when playing with partners with really simple user interface. Best usage is to put the iPhone in an armband and start playing.
+Tennis Plus is a quantified self app for tennis player. It helps you track your progress when playing with partners with really simple user interface. Best usage is to put the iPhone in an armband and start playing.
 
 Process is quite simple, you create a match an record points with gesture. Text to voice announces the score. The goal is to keep track of double-faults in service and force error to work on it on the long term
 
